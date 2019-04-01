@@ -91,7 +91,7 @@ namespace VRTK.GrabAttachMechanics
         /// </summary>
         public override void ProcessFixedUpdate()
         {
-            if (grabbedObject == null)
+            if (grabbedObject == null || grabbedObjectRigidBody == null)
             {
                 return;
             }

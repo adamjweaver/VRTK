@@ -1,4 +1,7 @@
 ﻿// Player Climb|Locomotion|20120
+
+using Util;
+
 namespace VRTK
 {
     using GrabAttachMechanics;
@@ -209,10 +212,10 @@ namespace VRTK
         {
             if (usePlayerScale)
             {
-                return (playArea.localRotation * Vector3.Scale(objTransform.localPosition, playArea.localScale));
+                return (playArea.rotation * Vector3.Scale(objTransform.localPosition, playArea.localScale));
             }
 
-            return (playArea.localRotation * objTransform.localPosition);
+            return (playArea.rotation * objTransform.localPosition);
         }
 
         protected virtual void OnGrabObject(object sender, ObjectInteractEventArgs e)

@@ -19,7 +19,7 @@ namespace VRTK
 
     /// <summary>
     /// The Shared Methods script is a collection of reusable static methods that are used across a range of different scripts.
-    /// </summary>
+    /// </VRTK_DeviceFinder
     public static class VRTK_SharedMethods
     {
         /// <summary>
