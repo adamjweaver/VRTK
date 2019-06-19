@@ -109,16 +109,16 @@ namespace VRTK.GrabAttachMechanics
             {
                 Vector3 angularTarget = angle * axis;
                 Vector3 calculatedAngularVelocity = Vector3.MoveTowards(grabbedObjectRigidBody.angularVelocity, angularTarget, maxDistanceDelta);
-                if (angularVelocityLimit == float.PositiveInfinity || calculatedAngularVelocity.sqrMagnitude < angularVelocityLimit)
+                if (float.IsPositiveInfinity(angularVelocityLimit) || calculatedAngularVelocity.sqrMagnitude < angularVelocityLimit)
                 {
                     grabbedObjectRigidBody.angularVelocity = calculatedAngularVelocity;
                 }
             }
 
-            Vector3 velocityTarget = positionDelta / Time.fixedDeltaTime;
+            Vector3 velocityTarget = positionDelta / Time.deltaTime;
             Vector3 calculatedVelocity = Vector3.MoveTowards(grabbedObjectRigidBody.velocity, velocityTarget, maxDistanceDelta);
 
-            if (velocityLimit == float.PositiveInfinity || calculatedVelocity.sqrMagnitude < velocityLimit)
+            if (float.IsPositiveInfinity(velocityLimit) || calculatedVelocity.sqrMagnitude < velocityLimit)
             {
                 grabbedObjectRigidBody.velocity = calculatedVelocity;
             }

@@ -1,4 +1,7 @@
 ﻿// Oculus Controller|SDK_Oculus|004
+
+using UnityEngine.XR;
+
 namespace VRTK
 {
 #if VRTK_DEFINE_SDK_OCULUS

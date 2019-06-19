@@ -38,6 +38,11 @@ namespace VRTK
             return null;
         }
 
+        public override Vector3 GetEyePosition(SDK_BaseController.ControllerHand hand)
+        {
+            return Vector3.zero;
+        }
+
         /// <summary>
         /// The GetHeadsetCamera method returns the Transform of the object that is used to hold the headset camera in the scene.
         /// </summary>

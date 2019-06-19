@@ -103,6 +103,20 @@ namespace VRTK
 #endif
         }
 
+        private OVRCameraRig _cachedRig;
+        
+        public override Vector3 GetEyePosition(SDK_BaseController.ControllerHand hand)
+        {
+            if (!_cachedRig)
+            {
+                _cachedRig = VRTK_SharedMethods.FindEvenInactiveComponent<OVRCameraRig>();
+            }
+
+            return hand == SDK_BaseController.ControllerHand.Left
+                ? _cachedRig.leftEyeAnchor.position
+                : _cachedRig.rightEyeAnchor.position;
+        }
+
         /// <summary>
         /// The GetHeadsetAngularVelocity method is used to determine the current angular velocity of the headset.
         /// </summary>

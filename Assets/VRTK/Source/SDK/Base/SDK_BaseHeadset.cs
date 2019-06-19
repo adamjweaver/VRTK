@@ -134,6 +134,8 @@ namespace VRTK
         /// <param name="camera">The Transform to with the camera on to add the fade functionality to.</param>
         public abstract void AddHeadsetFade(Transform camera);
 
+        public abstract Vector3 GetEyePosition(SDK_BaseController.ControllerHand hand);
+        
         protected Transform GetSDKManagerHeadset()
         {
             VRTK_SDKManager sdkManager = VRTK_SDKManager.instance;
