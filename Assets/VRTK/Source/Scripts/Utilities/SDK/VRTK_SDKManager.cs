@@ -409,13 +409,15 @@ namespace VRTK
         /// <returns>Whether the PlayerSettings' scripting define symbols were changed.</returns>
         public bool ManageScriptingDefineSymbols(bool ignoreAutoManageScriptDefines, bool ignoreIsActiveAndEnabled)
         {
-            Debug.LogError("Scripting define management currently disabled");
-            return false;
+        
             
             if (!((ignoreAutoManageScriptDefines || autoManageScriptDefines) && (ignoreIsActiveAndEnabled || isActiveAndEnabled)))
             {
                 return false;
             }
+            
+            Debug.LogError("Scripting define management currently disabled");
+            return false;
 
             //get valid BuildTargetGroups
             BuildTargetGroup[] targetGroups = VRTK_SharedMethods.GetValidBuildTargetGroups();
