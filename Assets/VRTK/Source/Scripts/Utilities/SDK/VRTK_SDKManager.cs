@@ -1,4 +1,7 @@
 ﻿// SDK Manager|Utilities|90010
+
+using BehaviorDesigner.Runtime.Tasks;
+
 namespace VRTK
 {
     using UnityEngine;
@@ -406,6 +409,9 @@ namespace VRTK
         /// <returns>Whether the PlayerSettings' scripting define symbols were changed.</returns>
         public bool ManageScriptingDefineSymbols(bool ignoreAutoManageScriptDefines, bool ignoreIsActiveAndEnabled)
         {
+            Debug.LogError("Scripting define management currently disabled");
+            return false;
+            
             if (!((ignoreAutoManageScriptDefines || autoManageScriptDefines) && (ignoreIsActiveAndEnabled || isActiveAndEnabled)))
             {
                 return false;

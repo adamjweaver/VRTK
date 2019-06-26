@@ -161,6 +161,13 @@ namespace VRTK
                 camera.gameObject.AddComponent<SteamVR_Fade>();
             }
         }
+
+        public override Vector3 GetEyePosition(SDK_BaseController.ControllerHand hand)
+        {
+            return GetHeadset()
+                .TransformPoint(SteamVR.instance.eyes[hand == SDK_BaseController.ControllerHand.Left ? 0 : 1].pos);
+//            return GetHeadsetCamera().position;
+        }
 #endif
     }
 }
