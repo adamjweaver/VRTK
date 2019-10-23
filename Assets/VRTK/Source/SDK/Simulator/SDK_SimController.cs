@@ -267,6 +267,9 @@ namespace VRTK
         /// <returns>The GameObject that has the model alias within it.</returns>
         public override GameObject GetControllerModel(ControllerHand hand)
         {
+            GameObject sdkModel = GetSDKManagerControllerModelForHand(hand);
+            if (sdkModel) return sdkModel;
+            
             GameObject model = null;
             GameObject simPlayer = SDK_InputSimulator.FindInScene();
             if (simPlayer != null)

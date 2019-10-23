@@ -483,7 +483,7 @@ namespace VRTK
 
         protected virtual void LateUpdate()
         {
-            if (controllerEvents != null)
+            if (controllerEvents != null && pointerEventData != null)
             {
                 pointerEventData.pointerId = (int)VRTK_ControllerReference.GetRealIndex(GetControllerReference());
                 VRTK_SharedMethods.AddDictionaryValue(pointerLengths, pointerEventData.pointerId, maximumLength, true);

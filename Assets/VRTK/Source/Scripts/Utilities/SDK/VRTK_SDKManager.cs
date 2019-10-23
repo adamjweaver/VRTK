@@ -642,15 +642,30 @@ namespace VRTK
             }
             else if (XRSettings.enabled)
             {
-                // Use the SDK Setup for the current VR Device if it's working already
-                // (may be due to command line argument '-vrmode')
-                index = Array.FindIndex(
-                    setups,
-                    setup => setup.usedVRDeviceNames.Contains(XRSettings.loadedDeviceName)
-                );
+                Debug.Log("xr was enables "+XRSettings.loadedDeviceName);
+
+                if (XRSettings.loadedDeviceName == "MockHMD")
+                {
+                    index = Array.FindIndex(
+                        setups,
+                        setup => setup.usedVRDeviceNames.All(vrDeviceName => vrDeviceName == "VRSimulator")
+                    );
+                }
+                else
+                {
+                    // Use the SDK Setup for the current VR Device if it's working already
+                    // (may be due to command line argument '-vrmode')
+                    index = Array.FindIndex(
+                        setups,
+                        setup => setup.usedVRDeviceNames.Contains(XRSettings.loadedDeviceName)
+                    );
+                }
+                
             }
             else
             {
+                Debug.Log("xr wasn't enables");
+
                 // If '-vrmode none' was used try to load the respective SDK Setup
                 string[] commandLineArgs = VRTK_SharedMethods.GetCommandLineArguements();
                 int commandLineArgIndex = Array.IndexOf(commandLineArgs, "-vrmode", 1);

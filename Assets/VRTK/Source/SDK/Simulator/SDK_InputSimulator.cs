@@ -220,9 +220,16 @@
             destroyed = true;
         }
 
-        protected virtual void Update()
+        private bool _inputInFixedUpdate = true;
+
+        public void SetHandleInputInFixedUpdate(bool handleInFixedUpdate)
         {
-            if (Input.GetKeyDown(toggleControlHints))
+            _inputInFixedUpdate = handleInFixedUpdate;
+        }
+
+        private void HandleInput()
+        {
+             if (Input.GetKeyDown(toggleControlHints))
             {
                 showControlHints = !showControlHints;
                 hintCanvas.SetActive(showControlHints);
@@ -318,6 +325,19 @@
                 UpdateHints();
             }
         }
+        
+        protected virtual void Update()
+        {
+
+            if (_inputInFixedUpdate) return;
+            HandleInput();
+        }
+
+        private void FixedUpdate()
+        {
+            if (!_inputInFixedUpdate) return;
+            HandleInput();
+        }
 
         protected virtual void SetHandColor(Transform hand, Color givenColor)
         {
@@ -374,13 +394,13 @@
                         Vector3 rot = Vector3.zero;
                         rot.x += (mouseDiff * handRotationMultiplier).y;
                         rot.y += (mouseDiff * handRotationMultiplier).x;
-                        currentHand.transform.Rotate(rot * Time.deltaTime);
+                        currentHand.transform.Rotate(rot * Time.unscaledDeltaTime);
                     }
                     else
                     {
                         Vector3 pos = Vector3.zero;
                         pos += mouseDiff * handMoveMultiplier;
-                        currentHand.transform.Translate(pos * Time.deltaTime);
+                        currentHand.transform.Translate(pos * Time.unscaledDeltaTime);
                     }
                 }
                 else
@@ -391,14 +411,14 @@
                         Vector3 rot = Vector3.zero;
                         rot.z += (mouseDiff * handRotationMultiplier).x;
                         rot.x += (mouseDiff * handRotationMultiplier).y;
-                        currentHand.transform.Rotate(rot * Time.deltaTime);
+                        currentHand.transform.Rotate(rot * Time.unscaledDeltaTime);
                     }
                     else
                     {
                         Vector3 pos = Vector3.zero;
                         pos.x += (mouseDiff * handMoveMultiplier).x;
                         pos.z += (mouseDiff * handMoveMultiplier).y;
-                        currentHand.transform.Translate(pos * Time.deltaTime);
+                        currentHand.transform.Translate(pos * Time.unscaledDeltaTime);
                     }
                 }
             }
@@ -432,7 +452,7 @@
 
         protected virtual void UpdatePosition()
         {
-            float moveMod = Time.deltaTime * playerMoveMultiplier * sprintMultiplier;
+            float moveMod = Time.unscaledDeltaTime * playerMoveMultiplier * sprintMultiplier;
             if (Input.GetKey(moveForward))
             {
                 transform.Translate(transform.forward * moveMod, Space.World);
